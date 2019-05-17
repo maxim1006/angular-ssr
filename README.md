@@ -1,3 +1,41 @@
+1. ng g universal --client-project=angular-ssr (получу все файлы для ssr: app.server.module.ts, main.server.ts, tsconfig.server.json)
+Также в angular.json добавится "server": {...
+
+dist/angular-ssr-server переименую в dist-server
+
+запускаю ng run angular-ssr:server и получаю main.js - angular universal bundle, который понадобится для дальнейшей компиляции client side bundle
+
+2. создаю prerender.ts и в скриптах package.json         
+"prerender": "./node_modules/.bin/ts-node -O='{\"module\":\"commonjs\"}' ./prerender.ts",
+
+тут меняю модуль на commonjs для import resolution
+
+запускаю npm run prerender и получаю prerender.html (на этом этапе уже будут валиться ошибки с window и тд, этот код оборачиваю в 
+
+```typescript
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+        if (isPlatformBrowser(this.platformId)) {
+            window.setTimeout(() => {
+                    console.log('setTimeout in ssr');
+                }
+            );
+        }
+    }
+```
+)
+
+3. Создаю  server.ts, а дальше билд апп, билд сервер, старт сервер ssr
+
+Все это только для одной странички без поддержки модулей
+
+
+4. Чтобы сделать годно 
+
+ng add @nguniversal/express-engine --clientProject angular.io-example
+
+
+
+
 # AngularSsr
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
