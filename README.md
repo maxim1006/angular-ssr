@@ -33,6 +33,14 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
 
 ng add @nguniversal/express-engine --clientProject angular.io-example
 
+добавилось куча файлов и поменялось места для генерации server bundle, из которого теперь достаю const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main');
+
+затем запускаю build:ssr, build, затем serve:ssr - профит
+
+Немного поменял, так как для ssr нужен браузерный index.html и dist/server/main.js для того чтобы из него вытащить AppServerModuleNgFactory, LAZY_MODULE_MAP, сам Ангуляр дополнительно еще конверить server.ts в .js,  но если использовать ts-node то этот шаг необязателен
+
+serve:ssr:ts и serve:ssr одно и тоже, только второе запускает скомпиленный js, а первое скомпиленный тс
+
 
 
 

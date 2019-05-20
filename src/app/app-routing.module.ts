@@ -3,9 +3,18 @@ import {RouterModule} from '@angular/router';
 
 
 const routes = [
-    {path: '', redirectTo: '', pathMatch: 'full'},
-    {path: 'lazy', loadChildren: './modules/lazy/lazy.module#LazyModule'},
-    {path: 'cards', loadChildren: './modules/cards/cards.module#CardsModule'}
+    {
+        path: '', redirectTo: '', pathMatch: 'full',
+        data: {pageTitle: 'Angular ssr', pageDescription: 'Angular ssr example'}
+    },
+    {
+        path: 'lazy', loadChildren: './modules/lazy/lazy.module#LazyModule',
+        data: {pageTitle: 'lazy', pageDescription: 'lazy page'}
+    },
+    {
+        path: 'cards', loadChildren: './modules/cards/cards.module#CardsModule',
+        data: {pageTitle: 'cards', pageDescription: 'cards page'}
+    }
 ];
 
 
@@ -17,4 +26,5 @@ const routes = [
         RouterModule
     ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
