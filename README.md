@@ -39,7 +39,9 @@ ng add @nguniversal/express-engine --clientProject angular.io-example
 
 Немного поменял, так как для ssr нужен браузерный index.html и dist/server/main.js для того чтобы из него вытащить AppServerModuleNgFactory, LAZY_MODULE_MAP, сам Ангуляр дополнительно еще конверить server.ts в .js,  но если использовать ts-node то этот шаг необязателен
 
-serve:ssr:ts и serve:ssr одно и тоже, только второе запускает скомпиленный js, а первое скомпиленный тс
+serve:ssr и serve:ssr:js одно и тоже, только второе запускает скомпиленный js, а первое скомпиленный тс
+
+Также в примере добавлена установка title и мета тегов
 
 
 

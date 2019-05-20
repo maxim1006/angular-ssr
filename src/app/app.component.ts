@@ -51,8 +51,8 @@ export class AppComponent {
                     }
                 );
 
-                this.meta.updateTag({name: 'twitter:card', content: 'page'});
-                this.meta.updateTag({name: 'twitter:site', content: 'AngularSSR'});
+                this.meta.updateTag({name: 'twitter:card', content: 'summary'});
+                this.meta.updateTag({name: 'twitter:site', content: '@AngularSSR'});
                 this.meta.updateTag({name: 'twitter:title', content: pageDescription});
                 this.meta.updateTag({name: 'twitter:description', content: pageDescription});
                 this.meta.updateTag({name: 'twitter:text:description', content: pageDescription});
