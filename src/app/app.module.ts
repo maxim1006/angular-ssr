@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
+import {AppShellNoRenderDirective} from './directives/app-shell-no-render.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+      AppShellNoRenderDirective
   ],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),

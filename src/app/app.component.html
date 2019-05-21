@@ -11,3 +11,12 @@
 <h3><a routerLink="/cards">cards</a></h3>
 
 <router-outlet></router-outlet>
+
+
+<!--These part won't be rendered via ssr-->
+<ng-container *appShellNoRender>
+    Not rendered via ssr
+</ng-container>
+
+<!--will be removed on client side with ssr-->
+<ng-container *appShellRender>Loader for appShellNoRender... </ng-container>
