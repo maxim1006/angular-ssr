@@ -11,10 +11,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr:w": "tsc-watch --onSuccess \"node ./server.js\" --onFailure \"echo Beep! Compilation Failed\" --compiler typescript/bin/tsc -p tsconfig.server.json",
     "serve:ssr": "./node_modules/.bin/ts-node -O='{\"module\":\"commonjs\"}' ./server.ts",
     "serve:ssr:js": "node dist/server",
     "build:ssr": "ng build --prod && ng run angular-ssr:server:production",
-    "build:ssr:webpack": "npm run build:client-and-server-bundles && npm run compile:server"
+    "build:ssr:webpack": "npm run build:ssr && npm run compile:server"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "@angular/router": "~7.2.0",
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",
+    "compression": "^1.7.4",
     "core-js": "^2.5.4",
     "express": "^4.17.0",
     "rxjs": "~6.3.3",
@@ -41,9 +43,9 @@
     "@angular/cli": "~7.2.3",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -55,6 +57,8 @@
     "protractor": "~5.4.0",
     "ts-loader": "^5.2.0",
     "ts-node": "~7.0.0",
+    "ts-node-dev": "^1.0.0-pre.39",
+    "tsc-watch": "^2.2.1",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2",
     "webpack-cli": "^3.1.0"

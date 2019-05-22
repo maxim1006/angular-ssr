@@ -13,10 +13,27 @@
 <router-outlet></router-outlet>
 
 
+
 <!--These part won't be rendered via ssr-->
 <ng-container *appShellNoRender>
     Not rendered via ssr
 </ng-container>
 
-<!--will be removed on client side with ssr-->
-<ng-container *appShellRender>Loader for appShellNoRender... </ng-container>
+<!--will be rendered via ssr-->
+<ng-container *appShellRender>Rendered by ssr, here u can add Loader... </ng-container>
+
+
+
+<ul *ngIf="(family$ | async) as family; else familyLoading">
+    <li *ngFor="let member of family">
+        {{member.name}}
+    </li>
+</ul>
+
+<ng-template #familyLoading>Loading family...</ng-template>
+
+<!--<ul>-->
+<!--    <li *ngFor="let member of family">-->
+<!--        {{member.name}}-->
+<!--    </li>-->
+<!--</ul>-->

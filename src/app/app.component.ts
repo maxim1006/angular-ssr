@@ -4,6 +4,8 @@ import {Meta, Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
 import {switchMap} from 'rxjs/internal/operators/switchMap';
+import {FamilyService} from './services/family.service';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -13,12 +15,16 @@ import {switchMap} from 'rxjs/internal/operators/switchMap';
 export class AppComponent {
     text = 'angular-ssr';
 
+    family$: Observable<{name: string}[]>;
+    family: {name: string}[];
+
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
         private router: Router,
         private route: ActivatedRoute,
         private title: Title,
-        private meta: Meta
+        private meta: Meta,
+        private familyService: FamilyService
     ) {
         if (isPlatformBrowser(this.platformId)) {
             window.setTimeout(() => {
@@ -58,6 +64,14 @@ export class AppComponent {
                 this.meta.updateTag({name: 'twitter:text:description', content: pageDescription});
                 this.meta.updateTag({name: 'twitter:image', content: 'https://avatars3.githubusercontent.com/u/3056353?s=400&v=4'});
             });
+    }
+
+    public ngOnInit(): void {
+        this.family$ = this.familyService.getFamily();
+
+        // this.familyService.getFamily().subscribe((data) => {
+        //     this.family = data;
+        // });
     }
 }
 

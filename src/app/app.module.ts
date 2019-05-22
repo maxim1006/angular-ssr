@@ -1,20 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AppShellNoRenderDirective} from './directives/app-shell-no-render.directive';
+import {AppShellRenderDirective} from './directives/app-shell-render.directive';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-      AppShellNoRenderDirective
-  ],
+    declarations: [
+        AppComponent,
+        AppShellNoRenderDirective,
+        AppShellRenderDirective
+    ],
     imports: [
         BrowserModule.withServerTransition({appId: 'serverApp'}),
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule
     ],
-  providers: [],
-  bootstrap: [AppComponent]
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

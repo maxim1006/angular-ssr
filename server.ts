@@ -6,6 +6,7 @@ import {ngExpressEngine} from '@nguniversal/express-engine';
 import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
 
 import * as express from 'express';
+import * as compression from 'compression';
 import {join} from 'path';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
@@ -13,6 +14,11 @@ enableProdMode();
 
 // Express server
 const app = express();
+
+// gzip
+// тут прекрасный ответ про nginx + express
+// https://stackoverflow.com/questions/46692341/express-nginx-cant-serve-static-files
+app.use(compression());
 
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist/browser');
@@ -24,10 +30,10 @@ const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main'
 // экспресс сам по себе не рендерит html, но легко расширяется за счет рендеров
 // LAZY_MODULE_MAP - мапа лезийных модулей
 app.engine('html', ngExpressEngine({
-  bootstrap: AppServerModuleNgFactory,
-  providers: [
-    provideModuleMap(LAZY_MODULE_MAP)
-  ]
+    bootstrap: AppServerModuleNgFactory,
+    providers: [
+        provideModuleMap(LAZY_MODULE_MAP)
+    ]
 }));
 
 // задаю какой вью engine использовать и где лежат .html файлы
@@ -38,15 +44,16 @@ app.set('views', DIST_FOLDER);
 // app.get('/api/**', (req, res) => { });
 // Serve static files from /browser
 app.get('*.*', express.static(DIST_FOLDER, {
-  maxAge: '1y'
+    maxAge: '1y'
 }));
+
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
-  res.render('index', { req });
+    res.render('index', {req});
 });
 
 // Start up the Node server
 app.listen(PORT, () => {
-  console.log(`Node Express server listening on http://localhost:${PORT}`);
+    console.log(`Node Express server listening on http://localhost:${PORT}`);
 });

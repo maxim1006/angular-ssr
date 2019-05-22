@@ -1,8 +1,8 @@
 import {Directive, Inject, OnInit, PLATFORM_ID, TemplateRef, ViewContainerRef} from '@angular/core';
 import {isPlatformBrowser, isPlatformServer} from '@angular/common';
 
-@Directive({selector: '[appShellNoRender]'})
-export class AppShellNoRenderDirective implements OnInit {
+@Directive({selector: '[appShellRender]'})
+export class AppShellRenderDirective implements OnInit {
     constructor(
         private viewContainer: ViewContainerRef,
         private templateRef: TemplateRef<any>,
@@ -11,11 +11,11 @@ export class AppShellNoRenderDirective implements OnInit {
 
     public ngOnInit(): void {
         if (isPlatformBrowser(this.platformId)) {
-            this.viewContainer.createEmbeddedView(this.templateRef);
+            this.viewContainer.clear();
         }
 
         if (isPlatformServer(this.platformId)) {
-            this.viewContainer.clear();
+            this.viewContainer.createEmbeddedView(this.templateRef);
         }
     }
 }
