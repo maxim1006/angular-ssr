@@ -51,6 +51,36 @@ serve:ssr и serve:ssr:js одно и тоже, только второе зап
 
 6. чтобы сделать запрос и сразу закинуть в ssr, в серивисе с гет методом обязательно указываю полный путь. Также использую transferState для того чтобы не дублировать запросы к серверу когда отренедерится страничка на клиенте
 
+7.
+
+sudo npm i -g firebase-tools
+firebase login
+firebase init hosting
+firebase deploy
+firebase open hosting:site
+
+// использую для ssr
+firebase init functions 
+
+в firebase.json
+// редирекчу все на ssrApp и в
+// "rewrites": [
+//     {
+//         "source": "**",
+//         "destination": "/index.html"
+//     }
+// ]
+//
+// пишу
+//
+// "rewrites": [
+//     {
+//         "source": "**",
+//         "function": "ssrApp"
+//     }
+// ]
+
+затем в папке functions в src добавляю server.ts (в котором закомментил listener и заэкспортил express (app)) затем долго долго инсталлю зависимости приложения для functions
 
 
 
