@@ -8,11 +8,13 @@ const routes = [
         data: {pageTitle: 'Angular ssr', pageDescription: 'Angular ssr example'}
     },
     {
-        path: 'lazy', loadChildren: './modules/lazy/lazy.module#LazyModule',
+        path: 'lazy',
+        loadChildren: () => import('./modules/lazy/lazy.module').then(m => m.LazyModule),
         data: {pageTitle: 'lazy', pageDescription: 'lazy page'}
     },
     {
-        path: 'cards', loadChildren: './modules/cards/cards.module#CardsModule',
+        path: 'cards',
+        loadChildren: () => import('./modules/cards/cards.module').then(m => m.CardsModule),
         data: {pageTitle: 'cards', pageDescription: 'cards page'}
     }
 ];
