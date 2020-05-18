@@ -32,7 +32,7 @@ export class FamilyService {
             // в противном случае делаю запрос (на сервер сайд) и кладу дату в transferState, при этом
             // проверяю if (isPlatformServer(this.platformId)) {...
             return this.http
-                .get<{ name: string }[]>('http://localhost:4000/assets/mocks/family.json')
+                .get<{ name: string }[]>('http://localhost:4200/assets/mocks/family.json')
                 .pipe(
                     tap((family) => {
                         if (isPlatformServer(this.platformId)) {
