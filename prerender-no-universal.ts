@@ -4,7 +4,7 @@ import {renderModuleFactory} from '@angular/platform-server';
 import {writeFileSync} from 'fs';
 
 // фактори из юниверсал билда, получил после ng g angular-ssr:server
-const {AppServerModuleNgFactory} = require('./dist-server/main.js');
+const {AppServerModuleNgFactory} = require('./dist/server/main.js');
 
 async function main() {
     let html;
